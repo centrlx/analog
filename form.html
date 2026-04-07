@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANALOG — Добавить трек</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="form">
+  <header class="navbar">
+    <a class="nav-logo" href="index.html" aria-label="ANALOG">
+      <span aria-hidden="true"></span>
+      ANALOG
+    </a>
+    <nav aria-label="Основная навигация">
+      <ul class="nav-links">
+        <li><a href="index.html"><span class="material-symbols-rounded">library_music</span><span>Коллекция</span></a></li>
+        <li><a class="active" href="form.html"><span class="material-symbols-rounded">add_circle</span><span>Добавить трек</span></a></li>
+        <li><a href="stats.html"><span class="material-symbols-rounded">equalizer</span><span>Статистика</span></a></li>
+        <li><a href="about.html"><span class="material-symbols-rounded">info</span><span>О проекте</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container form-layout">
+    <section class="page-header compact-header">
+      <p class="eyebrow">Добавьте новый трек в свою коллекцию</p>
+      <h1 class="page-title">Добавить трек</h1>
+      <p class="page-subtitle">Вставьте ссылку на SoundCloud, загрузите превью через oEmbed и сохраните запись в архив.</p>
+    </section>
+
+    <section class="form-shell">
+      <form id="trackForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="trackUrl">Ссылка SoundCloud</label>
+          <input
+            class="form-input"
+            id="trackUrl"
+            name="trackUrl"
+            type="url"
+            placeholder="https://soundcloud.com/artist/track-name"
+            autocomplete="off"
+            required
+          >
+          <p class="form-error" id="formError">Пожалуйста, вставьте корректную ссылку на SoundCloud.</p>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="customTitle">Свое название</label>
+            <input
+              class="form-input"
+              id="customTitle"
+              name="customTitle"
+              type="text"
+              placeholder="Например: любимый ночной трек"
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="customGenre">Жанр</label>
+            <label class="select-field form-select">
+              <select id="customGenre" name="customGenre" required>
+                <option value="">Выберите жанр</option>
+                <option value="Электроника">Электроника</option>
+                <option value="Хип-хоп">Хип-хоп</option>
+                <option value="Lo-fi">Lo-fi</option>
+                <option value="Эмбиент">Эмбиент</option>
+                <option value="Инди">Инди</option>
+                <option value="Другое">Другое</option>
+              </select>
+            </label>
+            <p class="form-error" id="genreError">Пожалуйста, выберите жанр.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trackNote">Заметка</label>
+          <textarea
+            class="form-input form-textarea"
+            id="trackNote"
+            name="trackNote"
+            placeholder="Почему вы сохранили этот трек?"
+            required
+          ></textarea>
+          <p class="form-error" id="noteError">Пожалуйста, добавьте заметку.</p>
+        </div>
+
+        <div class="form-note">
+          Поддерживаются треки и плейлисты. После загрузки вы увидите встроенный плеер и сможете сохранить элемент в локальную коллекцию с собственными настройками.
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-secondary" id="loadPreviewButton" type="button">
+            <span class="material-symbols-rounded">cloud_download</span>
+            Загрузить превью
+          </button>
+          <button class="btn btn-primary" id="saveTrackButton" type="submit" disabled>
+            <span class="material-symbols-rounded">save</span>
+            Сохранить трек
+          </button>
+          <a class="btn btn-ghost" href="index.html">
+            <span class="material-symbols-rounded">arrow_back</span>
+            Отмена
+          </a>
+        </div>
+
+        <div class="loader" id="previewLoader" aria-live="polite">
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+          <span class="loader-dot"></span>
+          Загружаем превью SoundCloud...
+        </div>
+      </form>
+
+      <section class="preview-area" id="previewArea" aria-live="polite">
+        <div class="preview-header">
+          <p class="preview-track-title" id="previewTitle">Предпросмотр трека</p>
+          <p class="preview-track-author" id="previewAuthor">Имя автора появится здесь</p>
+        </div>
+        <div class="track-player" id="previewEmbed"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <a class="site-footer__logo" href="index.html">ANALOG</a>
+        <p>Добавляйте треки, указывайте жанр и заметки, сохраняйте коллекцию локально.</p>
+      </div>
+      <div class="site-footer__column">
+        <p class="site-footer__title">Навигация</p>
+        <nav class="site-footer__nav" aria-label="Навигация в футере">
+          <a href="index.html">Коллекция</a>
+          <a href="form.html">Добавить трек</a>
+          <a href="stats.html">Статистика</a>
+          <a href="about.html">О проекте</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>

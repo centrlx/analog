@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANALOG — О проекте</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="about">
+  <header class="navbar">
+    <a class="nav-logo" href="index.html" aria-label="ANALOG">
+      <span aria-hidden="true"></span>
+      ANALOG
+    </a>
+    <nav aria-label="Основная навигация">
+      <ul class="nav-links">
+        <li><a href="index.html"><span class="material-symbols-rounded">library_music</span><span>Коллекция</span></a></li>
+        <li><a href="form.html"><span class="material-symbols-rounded">add_circle</span><span>Добавить трек</span></a></li>
+        <li><a href="stats.html"><span class="material-symbols-rounded">equalizer</span><span>Статистика</span></a></li>
+        <li><a class="active" href="about.html"><span class="material-symbols-rounded">info</span><span>О проекте</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="about-hero">
+      <div class="about-lead">
+        <p class="eyebrow">Музыкальный сервис</p>
+        <h1 class="page-title">ANALOG</h1>
+        <p class="about-copy">ANALOG — это персональный менеджер музыкальной коллекции, созданный для тех, кто хочет сохранять найденные на SoundCloud треки и плейлисты в одном аккуратном пространстве. Сервис помогает не просто складывать ссылки, а действительно вести собственный музыкальный архив: прослушивать треки прямо на сайте, отмечать уже прослушанные записи, добавлять жанры и личные заметки, а также видеть общую статистику по своей коллекции. В центре проекта находится идея осознанного прослушивания и удобного хранения музыки без лишнего визуального шума, рекомендаций и перегруженных интерфейсов.</p>
+      </div>
+    </section>
+
+    <section class="author-block">
+      <h2 class="section-caption">Автор</h2>
+      <article class="author-card">
+        <div class="author-avatar">
+          <span class="material-symbols-rounded">person</span>
+        </div>
+        <div>
+          <h3>Досов Гилар Эмильевич</h3>
+          <p>Группа: 11 ТИС/2024</p>
+          <p>github.com/сentrlx</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="about-content">
+      <article class="about-card">
+        <h2 class="about-card-title">Назначение</h2>
+        <p>Проект демонстрирует создание полноценного музыкального веб-приложения без фреймворков, с упором на DOM, события, хранение объектов в localStorage и интеграцию внешнего сервиса.</p>
+      </article>
+      <article class="about-card">
+        <h2 class="about-card-title">Как это работает</h2>
+        <ol class="about-steps">
+          <li>Пользователь добавляет ссылку на SoundCloud трек или плейлист.</li>
+          <li>Приложение получает oEmbed-данные и показывает встроенный плеер.</li>
+          <li>После сохранения элемент появляется в коллекции и сохраняется между сессиями.</li>
+        </ol>
+      </article>
+      <article class="about-card">
+        <h2 class="about-card-title">Стек</h2>
+        <div class="tech-tags">
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">SoundCloud oEmbed</span>
+          <span class="tech-tag">LocalStorage</span>
+          <span class="tech-tag">Material Icons</span>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <a class="site-footer__logo" href="index.html">ANALOG</a>
+        <p>Учебный адаптивный музыкальный веб-сервис, созданный на HTML, CSS и JavaScript.</p>
+      </div>
+      <div class="site-footer__column">
+        <p class="site-footer__title">Навигация</p>
+        <nav class="site-footer__nav" aria-label="Навигация в футере">
+          <a href="index.html">Коллекция</a>
+          <a href="form.html">Добавить трек</a>
+          <a href="stats.html">Статистика</a>
+          <a href="about.html">О проекте</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
