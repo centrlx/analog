@@ -10,14 +10,10 @@
     const listenedCount = tracks.filter(function (track) {
       return track.listened;
     }).length;
-    const playlistCount = tracks.filter(function (track) {
-      return track.category === 'playlist';
-    }).length;
 
     const cards = [
       { label: 'Всего элементов', value: tracks.length, icon: 'queue_music' },
-      { label: 'Прослушано', value: listenedCount, icon: 'done_all' },
-      { label: 'Плейлистов', value: playlistCount, icon: 'album' }
+      { label: 'Прослушано', value: listenedCount, icon: 'done_all' }
     ];
 
     summaryStrip.innerHTML = cards.map(function (card) {
@@ -39,11 +35,9 @@
 
     const searchInput = document.getElementById('searchInput');
     const statusFilter = document.getElementById('statusFilter');
-    const typeFilter = document.getElementById('typeFilter');
     const countNode = document.getElementById('trackCount');
     let searchQuery = '';
     let currentStatus = 'all';
-    let currentType = 'all';
 
     function filterTracks(tracks) {
       let filtered = tracks;
@@ -53,9 +47,6 @@
       }
       if (currentStatus === 'pending') {
         filtered = filtered.filter(function (track) { return !track.listened; });
-      }
-      if (currentType !== 'all') {
-        filtered = filtered.filter(function (track) { return track.category === currentType; });
       }
       if (searchQuery) {
         filtered = filtered.filter(function (track) {
@@ -88,7 +79,6 @@
         const listenedClass = track.listened ? ' listened' : '';
         const listenedStateClass = track.listened ? ' on' : '';
         const listenedLabel = track.listened ? 'Снять отметку' : 'Отметить прослушанным';
-        const typeLabel = track.category === 'playlist' ? 'ПЛЕЙЛИСТ' : 'ТРЕК';
         const genreMarkup = track.genre
           ? '<span class="genre-pill genre-pill-secondary">' + track.genre + '</span>'
           : '';
@@ -113,7 +103,6 @@
           '</div>' +
           '<div class="track-type">' +
           '<div class="track-tags">' +
-          '<span class="genre-pill">' + typeLabel + '</span>' +
           genreMarkup +
           '</div>' +
           '</div>' +
@@ -173,11 +162,6 @@
       renderTracks();
     });
 
-    typeFilter.addEventListener('change', function () {
-      currentType = typeFilter.value;
-      renderTracks();
-    });
-
     tracksContainer.addEventListener('click', async function (event) {
       const actionButton = event.target.closest('[data-action]');
       if (!actionButton) {
@@ -230,18 +214,13 @@
     const listenedCount = tracks.filter(function (track) {
       return track.listened;
     }).length;
-    const playlistCount = tracks.filter(function (track) {
-      return track.category === 'playlist';
-    }).length;
-    const trackOnlyCount = tracks.length - playlistCount;
     const pendingCount = tracks.length - listenedCount;
     const percent = tracks.length ? Math.round((listenedCount / tracks.length) * 100) : 0;
 
     const cards = [
       { label: 'Всего треков', value: tracks.length, icon: 'library_music' },
       { label: 'Прослушано', value: listenedCount, icon: 'headphones' },
-      { label: 'К прослушиванию', value: pendingCount, icon: 'queue_music' },
-      { label: 'Плейлистов', value: playlistCount, icon: 'schedule' }
+      { label: 'К прослушиванию', value: pendingCount, icon: 'queue_music' }
     ];
 
     statsGrid.innerHTML = cards.map(function (card) {
@@ -259,8 +238,6 @@
 
     const breakdownList = document.getElementById('breakdownList');
     breakdownList.innerHTML =
-      '<div class="metric-bar"><div class="metric-label"><span>Треки</span><strong>' + trackOnlyCount + '</strong></div><div class="metric-track"><div class="metric-fill" style="width:' + (tracks.length ? Math.round((trackOnlyCount / tracks.length) * 100) : 0) + '%"></div></div></div>' +
-      '<div class="metric-bar"><div class="metric-label"><span>Плейлисты</span><strong>' + playlistCount + '</strong></div><div class="metric-track"><div class="metric-fill" style="width:' + (tracks.length ? Math.round((playlistCount / tracks.length) * 100) : 0) + '%"></div></div></div>' +
       '<div class="metric-bar"><div class="metric-label"><span>Прослушано</span><strong>' + listenedCount + '</strong></div><div class="metric-track"><div class="metric-fill" style="width:' + percent + '%"></div></div></div>' +
       '<div class="metric-bar"><div class="metric-label"><span>Не прослушано</span><strong>' + pendingCount + '</strong></div><div class="metric-track"><div class="metric-fill" style="width:' + (tracks.length ? Math.round((pendingCount / tracks.length) * 100) : 0) + '%"></div></div></div>';
 
@@ -301,12 +278,7 @@
       return;
     }
 
-    if (playlistCount > trackOnlyCount) {
-      statsInsight.textContent = 'В коллекции доминируют плейлисты, значит вы чаще сохраняете длинные подборки, чем отдельные треки.';
-      return;
-    }
-
-    statsInsight.textContent = 'Основу коллекции составляют отдельные треки. Сейчас прослушано ' + percent + '% от общего объёма.';
+    statsInsight.textContent = 'Сейчас прослушано ' + percent + '% от общего объёма коллекции.';
   }
 
   if (page === 'home') {

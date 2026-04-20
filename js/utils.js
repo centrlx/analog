@@ -20,10 +20,6 @@
       .replace(/color=%23[0-9a-fA-F]{6}/g, 'color=%23000000');
   }
 
-  function getTrackCategory(url) {
-    return url.includes('/sets/') ? 'playlist' : 'track';
-  }
-
   function parsePreviewData(payload, originalUrl) {
     const title = payload.title || 'Без названия';
     const author = payload.author_name || 'Неизвестный автор';
@@ -32,8 +28,7 @@
       title: title,
       author: author,
       soundcloudUrl: payload.author_url ? originalUrl : originalUrl,
-      embedHtml: normalizeEmbedHtml(payload.html || ''),
-      category: getTrackCategory(originalUrl)
+      embedHtml: normalizeEmbedHtml(payload.html || '')
     };
   }
 
@@ -120,7 +115,6 @@
     parsePreviewData: parsePreviewData,
     isSoundCloudUrl: isSoundCloudUrl,
     showToast: showToast,
-    confirmDialog: confirmDialog,
-    getTrackCategory: getTrackCategory
+    confirmDialog: confirmDialog
   };
 })();

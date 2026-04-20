@@ -135,7 +135,6 @@
       embedHtml: previewData.embedHtml,
       addedAt: new Date().toISOString(),
       listened: false,
-      category: previewData.category,
       genre: customGenreInput.value.trim(),
       note: trackNoteInput.value.trim(),
       originalTitle: previewData.title
